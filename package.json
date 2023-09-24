@@ -1,19 +1,16 @@
 {
-  "name":         "@leismore/lmos-nodejs-lmerror",
-  "version":      "1.0.0",
-  "description":  "An Error class for LMOS for Node.js project",
-  "main":         "./dist/index.js",
-  "types":        "./dist/index.d.ts",
-  
+  "name": "@leismore/lmos-nodejs-lmerror",
+  "version": "1.0.0",
+  "description": "An Error class for LMOS for Node.js project",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leismore/lmos-nodejs-lmerror.git"
   },
-
   "keywords": [
     "Error class",
     "Error",
@@ -25,18 +22,18 @@
     "NodeJS",
     "Node"
   ],
-
   "author": {
-    "name":   "Kyle Chine",
-    "url":    "https://kyle-chine.leismore.co",
-    "email":  "kyle.chine@leismore.co"
+    "name": "Kyle Chine",
+    "url": "https://kyle-chine.leismore.co",
+    "email": "kyle.chine@leismore.co"
   },
-
   "license": "AGPL-3.0-only",
-
   "bugs": {
     "url": "https://github.com/leismore/lmos-nodejs-lmerror/issues"
   },
-
-  "homepage": "https://github.com/leismore/lmos-nodejs-lmerror#readme"
+  "homepage": "https://github.com/leismore/lmos-nodejs-lmerror#readme",
+  "devDependencies": {
+    "@types/node": "^18.17.19",
+    "typescript": "^5.2.2"
+  }
 }
