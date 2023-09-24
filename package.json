@@ -1,8 +1,9 @@
 {
-  "name": "@leismore/lmos-nodejs-lmerror",
-  "version": "1.0.0",
-  "description": "An Error class for LMOS for Node.js project",
-  "main": "index.js",
+  "name":         "@leismore/lmos-nodejs-lmerror",
+  "version":      "1.0.0",
+  "description":  "An Error class for LMOS for Node.js project",
+  "main":         "./dist/index.js",
+  "types":        "./dist/index.d.ts",
   
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
