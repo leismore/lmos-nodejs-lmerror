@@ -1,5 +1,6 @@
 /**
- * LMError - The general Error class for LMOS NodeJS projects.
+ * 
+ * LMError - An Error class for LMOS for Node.js project
  *
  * Error
  *   invalid_error_message
@@ -9,6 +10,7 @@
  *   invalid_http_body
  *   invalid_previous
  *   previous_exists
+ * 
  */
 
 import {EOL} from 'os';
@@ -22,6 +24,17 @@ class LMError extends Error
   public readonly response?:   Res;
   public          previous?:   Error;
 
+  /**
+   * 
+   * @throws Error
+   *   invalid_error_message
+   *   invalid_error_code
+   *   invalid_http_statusCode
+   *   invalid_http_header
+   *   invalid_http_body
+   *   invalid_previous
+   * 
+   */
   public constructor(error: Err, response?: Res, previous?: Error)
   {
     super(error.message);
@@ -48,6 +61,7 @@ class LMError extends Error
    * @throws Error
    *   invalid_previous
    *   previous_exists
+   * 
    */
   public addPrevious(previous: Error):void
   {
@@ -135,6 +149,13 @@ class LMError extends Error
     }
   }
 
+  /**
+   * 
+   * @throws Error
+   *   invalid_error_message
+   *   invalid_error_code
+   * 
+   */
   private filterError(error: Err): Err
   {
     if (ptnMessage.test(error.message) === false)
@@ -148,6 +169,14 @@ class LMError extends Error
     return error;
   }
 
+  /**
+   * 
+   * @throws Error
+   *   invalid_http_statusCode
+   *   invalid_http_header
+   *   invalid_http_body
+   * 
+   */
   private filterResponse(response: Res): Res
   {
     if (ptnStatusCode.test(response.statusCode) === false)
@@ -179,6 +208,12 @@ class LMError extends Error
     return response;
   }
 
+  /**
+   * 
+   * @throws Error
+   *   invalid_previous
+   * 
+   */
   private filterPrevious(previous: Error): Error
   {
     if (previous instanceof Error)
@@ -191,5 +226,8 @@ class LMError extends Error
     }
   }
 }
+
+
+
 
 export {LMError, Err, Res};
