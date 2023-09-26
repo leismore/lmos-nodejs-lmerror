@@ -154,7 +154,14 @@ class LMError extends Error
     {
       throw new Error('invalid_http_statusCode');
     }
-    if (response.headers !== undefined && response.headers !== {})
+
+    if (response.headers !== undefined && typeof response.headers !== 'object')
+    {
+      throw new Error('invalid_http_header');
+    }
+    else if (
+      response.headers !== undefined && Object.keys(response.headers).length !== 0
+    )
     {
       for (let k in response.headers)
       {
