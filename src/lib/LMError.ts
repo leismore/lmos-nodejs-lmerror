@@ -12,9 +12,9 @@
  */
 
 import {EOL} from 'os';
-import {ptnMessage, ptnCode, ptnStatusCode} from './patterns.ts';
-import {Err} from './type/Err.ts';
-import {Res} from './type/Res.ts';
+import {ptnMessage, ptnCode, ptnStatusCode} from './patterns.js';
+import {Err} from './type/Err.js';
+import {Res} from './type/Res.js';
 
 class LMError extends Error
 {
