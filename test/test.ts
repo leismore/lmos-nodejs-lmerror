@@ -106,22 +106,114 @@ const res_invalid_statusCode_headers:Res = {
 const error    = new Error('standard Error');
 const lmerror  = new LMError(err_valid, res_valid, error);
 
+/**
+ * 
+ * Validating LMError properties
+ * 
+ * @param {LMError}  lmerror
+ * @param {Err}      error 
+ * @param {Res}      [response] 
+ * @param {Error}    [previous]
+ *  
+ */
+function validate_lmerror(lmerror:LMError, error:Err, response?:Res, previous?:Error):void
+{
+    // Check error-message & error-code
+    assert(
+        (lmerror.message === error.message && lmerror.error.message === error.message),
+        'incorrect error message'
+    );
+    assert(
+        (lmerror.error.code === error.code),
+        'incorrect error code'
+    );
+
+    // Check HTTP response
+    if (response === undefined)
+    {
+        assert(
+            (lmerror.response === undefined),
+            'incorrect HTTP response'
+        );
+    }
+    else
+    {
+        if (lmerror.response === undefined)
+        {
+            assert(false, 'incorrect HTTP response');
+        }
+        else
+        {
+            // Check HTTP status code
+            assert(
+                (lmerror.response.statusCode === response.statusCode),
+                'incorrect HTTP status code'
+            );
+
+            // Check HTTP headers
+            if (response.headers === undefined)
+            {
+                assert(
+                    (lmerror.response.headers === undefined),
+                    'incorrect HTTP headers'
+                );
+            }
+            else
+            {
+                if (lmerror.response.headers === undefined)
+                {
+                    assert(false, 'incorrect HTTP headers');
+                }
+                else
+                {
+                    assert(
+                        ( Object.keys(lmerror.response.headers).length === Object.keys(response.headers).length ),
+                        'incorrect HTTP headers'
+                    );
+
+                    for (let k in lmerror.response.headers)
+                    {
+                        let v = lmerror.response.headers[k];
+                        assert(
+                            (k in response.headers && response.headers[k] === v),
+                            ('incorrect HTTP header: ' + k)
+                        );
+                    }
+                }
+            }
+
+            // Check HTTP body
+            assert(lmerror.response.body === response.body, 'incorrect HTTP body');
+        }
+    }
+
+    // Check previous
+    assert(lmerror.previous === previous, 'incorrect previous');
+
+    // Check timestamp
+    assert( lmerror.timestamp instanceof Date, 'incorrect timestamp' );
+}
+
 // Test Started
 
 describe('LMError Object Initialisation', function(){
 
     // Creating with valid parameters
     it('With all parameters', function(){
-        new LMError(err_valid, res_valid, lmerror);
+        let lme = new LMError(err_valid, res_valid, lmerror);
+        validate_lmerror(lme, err_valid, res_valid, lmerror);
     });
     it('With err only', function(){
-        new LMError(err_valid);
+        let lme = new LMError(err_valid);
+        validate_lmerror(lme, err_valid);
     });
     it('With err and res', function(){
-        new LMError(err_valid, res_valid);
+        let lme = new LMError(err_valid, res_valid);
+        validate_lmerror(lme, err_valid, res_valid);
     });
     it('With err and previous', function(){
-        new LMError(err_valid, undefined, lmerror);
+        let lme = new LMError(err_valid, undefined, lmerror);
+        validate_lmerror(lme, err_valid, undefined, lmerror);
     });
 
     // Creating with invalid Err-s
@@ -167,13 +259,25 @@ describe('LMError Object Initialisation', function(){
 });
 
 describe('LMError: Adding a previous error', function(){
-    it('With a standard error', function(){
+    it('With a standard error', function(done){
         let e = new LMError(err_valid, res_valid);
-        e.addPrevious(error);
+        let old_timestamp = e.timestamp.getTime();
+        setTimeout(() => {
+            e.addPrevious(error);
+            validate_lmerror(e, err_valid, res_valid, error);
+            assert( (e.timestamp.getTime() > old_timestamp), 'timestamp is not re-generated' );
+            done();
+        }, 1);
     });
-    it('With a LMError', function(){
+    it('With a LMError', function(done){
         let e = new LMError(err_valid, res_valid);
-        e.addPrevious(lmerror);
+        let old_timestamp = e.timestamp.getTime();
+        setTimeout(() => {
+            e.addPrevious(lmerror);
+            validate_lmerror(e, err_valid, res_valid, lmerror);
+            assert( (e.timestamp.getTime() > old_timestamp), 'timestamp is not re-generated' );
+            done();
+        }, 1);
     });
     it('A previous error already exists', function(){
         assert.throws(function(){
