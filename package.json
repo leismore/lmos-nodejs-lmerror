@@ -1,6 +1,6 @@
 {
   "name": "@leismore/lmos-nodejs-lmerror",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An Error class for LMOS for Node.js project",
   "main": "./dist/index.js",
   "type": "module",
@@ -35,9 +35,9 @@
   "homepage": "https://github.com/leismore/lmos-nodejs-lmerror#readme",
   "devDependencies": {
     "@types/chai": "^4.3.6",
-    "@types/mocha": "^10.0.1",
+    "@types/mocha": "^10.0.2",
     "@types/node": "^18.17.19",
-    "chai": "^4.3.8",
+    "chai": "^4.3.10",
     "mocha": "^10.2.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
