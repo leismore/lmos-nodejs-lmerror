@@ -23,6 +23,7 @@ class LMError extends Error
   public readonly error:       Err;
   public readonly response?:   Res;
   public          previous?:   Error;
+  public          timestamp:   Date;
 
   /**
    * 
@@ -54,6 +55,7 @@ class LMError extends Error
     {
       throw e;
     }
+    this.timestamp = new Date();
   }
 
   /**
@@ -75,6 +77,7 @@ class LMError extends Error
       {
         throw e;
       }
+      this.timestamp = new Date();
     }
     else
     {
@@ -102,9 +105,8 @@ class LMError extends Error
 
   private toStringPrefix(): string
   {
-    let dateTime  = new Date();
     let errorName = this.constructor.name;
-    return (dateTime.toISOString() + ' / ' + errorName);
+    return (this.timestamp.toISOString() + ' / ' + errorName);
   }
 
   private toStringError(): string
