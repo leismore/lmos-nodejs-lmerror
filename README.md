@@ -7,6 +7,7 @@ An Error class for [LMOS for Node.js](https://nodejs.lmos.leismore.org) project
 * Error Message & Code
 * HTTP-Response Integration
 * Chained-Errors Support
+* Timestamp
 
 ## Motivation
 
@@ -84,6 +85,7 @@ type LMErrorRes = {                                     // HTTP response
 public readonly error:       LMErrorErr;
 public readonly response?:   LMErrorRes;
 public          previous?:   Error;
+public          timestamp:   Date;
 ```
 
 ### Methods
