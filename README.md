@@ -31,6 +31,10 @@ To satisfy the requirement of Node.js environment, I have decided to introduce t
 
 `npm test`
 
+## Build
+
+`npm run build`
+
 ## Example
 
 ```typescript
@@ -126,7 +130,7 @@ public toString(): string
 
 ## License
 
-© [Leismore](https://www.leismore.co) 2023
+© [Leismore](https://www.leismore.co) 2024
 
 GNU AFFERO GENERAL PUBLIC LICENSE v3
 
