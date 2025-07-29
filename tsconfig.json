@@ -9,7 +9,10 @@
     "resolveJsonModule":             true,
     "declaration":                   true,
     "allowJs":                       false,
-    "outDir":                        "dist"
+    "outDir":                        "dist",
+    "paths": {
+      "@lib/*":                ["./src/lib/*"]
+    }
   },
   "include":            ["src/**/*"]
 }
