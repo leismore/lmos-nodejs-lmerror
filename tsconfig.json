@@ -1,18 +1,15 @@
 {
   "compilerOptions":
   {
-    "lib":                          ["ES2017"],
-    "target":                        "ES2017",
-    "baseUrl":                       "./src/",
-    "outDir":                        "./dist/",
+    "lib":                          ["ES2023"],
+    "target":                        "ES2023",
     "module":                        "nodenext",
     "moduleResolution":              "nodenext",
-    "resolveJsonModule":             true,
     "strict":                        true,
+    "resolveJsonModule":             true,
     "declaration":                   true,
     "allowJs":                       false,
-    "checkJs":                       false
+    "outDir":                        "dist"
   },
-  "include":            ["./src/"],
-  "exclude":            ["./node_modules/", "./dist/", "./.git/", "./test/"]
+  "include":            ["src/**/*"]
 }
