@@ -131,7 +131,7 @@ class LMError extends Error
    *   invalid_error_message
    *   invalid_error_code
    */
-  public static filterError(error: unknown): Err
+  protected static filterError(error: unknown): Err
   {
     let validError : Err;
     let message    : string;
