@@ -1,29 +1,28 @@
 /**
- * 
  * LMError - An Error class for LMOS for Node.js project
  *
  * Error
+ *   invalid_error
  *   invalid_error_message
  *   invalid_error_code
+ *   invalid_http_response
  *   invalid_http_statusCode
  *   invalid_http_header
  *   invalid_http_body
  *   invalid_previous
- *   previous_exists
- * 
  */
 
 import {EOL} from 'os';
-import {ptnMessage, ptnCode, ptnStatusCode} from './patterns.js';
-import {Err} from './type/Err.js';
-import {Res} from './type/Res.js';
+import {ptnMessage, ptnCode, ptnStatusCode} from '@lib/patterns.js';
+import {Err} from '@lib/type/Err.js';
+import {Res} from '@lib/type/Res.js';
 
 class LMError extends Error
 {
-  public readonly error:       Err;
-  public readonly response?:   Res;
-  public          previous?:   Error;
-  public          timestamp:   Date;
+  public readonly error      :   Err;
+  public readonly response?  :   Res;
+  public readonly previous?  :   Error;
+  public readonly timestamp  :   Date;
 
   /**
    * 
@@ -56,33 +55,6 @@ class LMError extends Error
       throw e;
     }
     this.timestamp = new Date();
-  }
-
-  /**
-   * 
-   * @throws Error
-   *   invalid_previous
-   *   previous_exists
-   * 
-   */
-  public addPrevious(previous: Error):void
-  {
-    if (this.previous === undefined)
-    {
-      try
-      {
-        this.previous = this.filterPrevious(previous);
-      }
-      catch(e)
-      {
-        throw e;
-      }
-      this.timestamp = new Date();
-    }
-    else
-    {
-      throw new Error('previous_exists');
-    }
   }
 
   public toString(): string
@@ -152,23 +124,60 @@ class LMError extends Error
   }
 
   /**
+   * Test if the error is valid
    * 
    * @throws Error
+   *   invalid_error
    *   invalid_error_message
    *   invalid_error_code
-   * 
    */
-  private filterError(error: Err): Err
+  public static filterError(error: unknown): Err
   {
-    if (ptnMessage.test(error.message) === false)
+    let validError : Err;
+    let message    : string;
+    let code       : string;
+
+    // Check if the error matches the expected structure
+    if (typeof error !== 'object' || error === null)
+    {
+      throw new Error('invalid_error');
+    }
+
+    if ('message' in error && typeof error.message === 'string')
+    {
+      message = error.message;
+    }
+    else
     {
       throw new Error('invalid_error_message');
     }
-    if (ptnCode.test(error.code) === false)
+
+    if ('code' in error && typeof error.code === 'string')
+    {
+      code = error.code;
+    }
+    else
     {
       throw new Error('invalid_error_code');
     }
-    return error;
+    
+    // Check if the message and code match the patterns
+    if (ptnMessage.test(message) === false)
+    {
+      throw new Error('invalid_error_message');
+    }
+    if (ptnCode.test(code) === false)
+    {
+      throw new Error('invalid_error_code');
+    }
+
+    // Return the valid error object
+    validError = {
+      message : message,
+      code    : code
+    };
+
+    return validError;
   }
 
   /**
