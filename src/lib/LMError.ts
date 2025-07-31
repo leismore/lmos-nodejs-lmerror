@@ -220,12 +220,12 @@ class LMError extends Error
   }
 
   /**
+   * Test if the previous is an Error instance
    * 
    * @throws Error
    *   invalid_previous
-   * 
    */
-  private filterPrevious(previous: Error): Error
+  protected static filterPrevious(previous: unknown): Error
   {
     if (previous instanceof Error)
     {
