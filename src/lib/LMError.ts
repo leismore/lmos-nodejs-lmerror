@@ -81,10 +81,10 @@ class LMError extends Error
     return text;
   }
 
-  private toStringPrefix(): string
+  protected toStringPrefix(): string
   {
-    let errorName = this.constructor.name;
-    return (this.timestamp.toISOString() + ' / ' + errorName);
+    const ERROR_NAME:string = this.constructor.name;
+    return ( this.timestamp.toISOString() + ' / ' + ERROR_NAME );
   }
 
   private toStringError(): string
