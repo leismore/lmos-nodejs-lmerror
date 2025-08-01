@@ -25,35 +25,41 @@ class LMError extends Error
   public readonly timestamp  :   Date;
 
   /**
-   * 
-   * @throws Error
+   * @throws {Error}
+   *   invalid_error
    *   invalid_error_message
    *   invalid_error_code
+   *   invalid_http_response
    *   invalid_http_statusCode
    *   invalid_http_header
    *   invalid_http_body
    *   invalid_previous
-   * 
    */
   public constructor(error: Err, response?: Res, previous?: Error)
   {
-    super(error.message);
-    try
-    {
-      this.error = this.filterError(error);
-      if (response!==undefined)
+    // Validate the error, response, and previous parameters
+    try {
+      error = LMError.filterError(error);
+      if (response !== undefined)
       {
-        this.response   = this.filterResponse(response);
+        response = LMError.filterResponse(response);
       }
       if (previous !== undefined)
       {
-        this.previous = this.filterPrevious(previous);
+        previous = LMError.filterPrevious(previous);
       }
-    }
-    catch (e)
+    } catch (e)
     {
       throw e;
     }
+
+    // Initialize the parent Error class
+    super(error.message, {cause: previous === undefined? undefined : previous});
+
+    // Initialize the properties
+    this.error     = error;
+    this.response  = response;
+    this.previous  = previous;
     this.timestamp = new Date();
   }
 
@@ -126,7 +132,7 @@ class LMError extends Error
   /**
    * Test if the error is valid
    * 
-   * @throws Error
+   * @throws {Error}
    *   invalid_error
    *   invalid_error_message
    *   invalid_error_code
@@ -183,7 +189,7 @@ class LMError extends Error
   /**
    * Test if the response is valid
    * 
-   * @throws Error
+   * @throws {Error}
    *   invalid_http_response
    *   invalid_http_statusCode
    *   invalid_http_header
@@ -274,7 +280,7 @@ class LMError extends Error
   /**
    * Test if the previous is an Error instance
    * 
-   * @throws Error
+   * @throws {Error}
    *   invalid_previous
    */
   protected static filterPrevious(previous: unknown): Error
