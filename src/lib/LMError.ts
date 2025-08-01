@@ -15,7 +15,7 @@
 import {EOL} from 'os';
 import {ptnMessage, ptnCode, ptnStatusCode} from '@lib/patterns.js';
 import {Err} from '@lib/type/Err.js';
-import {Res} from '@lib/type/Res.js';
+import {Res, Header as ResHeader} from '@lib/type/Res.js';
 
 class LMError extends Error
 {
@@ -181,42 +181,94 @@ class LMError extends Error
   }
 
   /**
+   * Test if the response is valid
    * 
    * @throws Error
+   *   invalid_http_response
    *   invalid_http_statusCode
    *   invalid_http_header
    *   invalid_http_body
-   * 
    */
-  private filterResponse(response: Res): Res
+  protected static filterResponse(response: unknown): Res
   {
-    if (ptnStatusCode.test(response.statusCode) === false)
+    let validResponse: Res;
+    let statusCode: string;
+    let headers: (ResHeader[]|undefined);
+    let body:any;
+
+    // Check if the response matches the expected structure
+    if (typeof response !== 'object' || response === null)
+    {
+      throw new Error('invalid_http_response');
+    }
+
+    if ('statusCode' in response && typeof response.statusCode === 'string')
+    {
+      statusCode = response.statusCode;
+    }
+    else
     {
       throw new Error('invalid_http_statusCode');
     }
 
-    if (response.headers !== undefined && typeof response.headers !== 'object')
+    if (   'headers' in response            === false        ||
+         ( 'headers' in response            === true  &&
+            response.headers                === undefined )  ||
+         ( 'headers' in response            === true  &&
+            Array.isArray(response.headers) === true  &&
+            response.headers.length         === 0         )
+       )
     {
-      throw new Error('invalid_http_header');
+      headers = undefined;
     }
-    else if (
-      response.headers !== undefined && Object.keys(response.headers).length !== 0
-    )
+    else if ( 'headers' in response           &&
+              Array.isArray(response.headers) &&
+              response.headers.length > 0 )
     {
-      for (let k in response.headers)
+      headers = [];
+
+      for (const e of response.headers)
       {
-        if (k.length === 0 || response.headers[k].length === 0)
+        if ( ( typeof e       !== 'object' || e              === null ) ||
+             ( typeof e.name  !== 'string' || e.name.length  === 0    ) ||
+             ( typeof e.value !== 'string' || e.value.length === 0    )
+           )
         {
           throw new Error('invalid_http_header');
         }
+        else {
+          headers.push({
+            name  : e.name,
+            value : e.value
+          });
+        }
       }
     }
-    else
-    {
-      response.headers = undefined;
+    else {
+      throw new Error('invalid_http_header');
     }
 
-    return response;
+    if ( 'body' in response === false ||
+          response.body     === undefined )
+    {
+      body = undefined;
+    } else {
+      body = response.body;
+    }
+
+    // Check if the statusCode, headers, and body match the expected patterns
+    if (ptnStatusCode.test(statusCode) === false)
+    {
+      throw new Error('invalid_http_statusCode');
+    }
+
+    // Return the valid response object
+    validResponse = {
+      statusCode : statusCode,
+      headers    : headers,
+      body       : body
+    };
+    return validResponse;
   }
 
   /**
@@ -241,4 +293,4 @@ class LMError extends Error
 
 
 
-export {LMError, Err, Res};
+export {LMError, Err, Res, ResHeader};

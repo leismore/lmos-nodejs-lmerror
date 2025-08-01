@@ -13,4 +13,4 @@ type Res = {                         // HTTP response
   readonly body?       :  any        // HTTP body
 };
 
-export {Res};
+export {Res, Header};

@@ -5,5 +5,6 @@
 export {
     LMError,
     Err as LMErrorErr,
-    Res as LMErrorRes
+    Res as LMErrorRes,
+    ResHeader as LMErrorResHeader
 } from '@lib/LMError.js';
