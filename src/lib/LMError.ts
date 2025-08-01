@@ -87,7 +87,7 @@ class LMError extends Error
     return ( this.timestamp.toISOString() + ' / ' + ERROR_NAME );
   }
 
-  private toStringError(): string
+  protected toStringError(): string
   {
     return ( `${this.error.message} (${this.error.code})` );
   }
