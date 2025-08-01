@@ -117,7 +117,7 @@ class LMError extends Error
     }
   }
 
-  private toStringPrevious(): string | null
+  protected toStringPrevious(): (string | null)
   {
     if (this.previous === undefined)
     {
