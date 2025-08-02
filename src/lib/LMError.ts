@@ -92,29 +92,44 @@ class LMError extends Error
     return ( `${this.error.message} (${this.error.code})` );
   }
 
-  private toStringResponse(): string | null
+  protected toStringResponse(): (string | null)
   {
-    let text = '';
+    let statusCode :  string;
+    let headers    : (string|null);
+    let body       : (string|null);
+
+    // No response, return null
     if (this.response === undefined)
     {
       return null;
     }
-    else
+
+    // Convert the response to string
+    statusCode = this.response.statusCode;
+
+    if (this.response.headers === undefined)
     {
-      text = `HTTP ${this.response.statusCode}`;
-      if (this.response.headers !== undefined)
-      {
-        for (let k in this.response.headers)
-        {
-          text = text + EOL + `${k}: ${this.response.headers[k]}`;
-        }
-      }
-      if (this.response.body !== undefined)
-      {
-        text = text + EOL + String(this.response.body);
-      }
-      return text;
+      headers = null;
     }
+    else {
+      headers = this.response.headers.map((header: ResHeader) => {
+        return `${header.name}: ${header.value}`;
+      }).join(EOL);
+    }
+
+    if (this.response.body === undefined)
+    {
+      body = null;
+    }
+    else {
+      body = String(this.response.body);
+    }
+
+    // Return the formatted response string
+    return (  ( `HTTP ${statusCode}`       + EOL      ) +
+              ( headers !== null ? headers + EOL : '' ) +
+              ( body    !== null ? body    + EOL : '' )
+    );
   }
 
   protected toStringPrevious(): (string | null)
