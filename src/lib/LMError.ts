@@ -65,20 +65,26 @@ class LMError extends Error
 
   public toString(): string
   {
-    let text:string = (
-      EOL + this.toStringPrefix() + EOL +
-      this.toStringError()
+    let prefix   :  string       = this.toStringPrefix();
+    let error    :  string       = this.toStringError();
+    let response : (string|null) = this.toStringResponse();
+    let previous : (string|null) = this.toStringPrevious();
+
+    prefix = prefix.trim();
+    error  = error.trim();
+
+    if (response !== null)
+    { response = response.trim(); }
+
+    if (previous !== null)
+    { previous = previous.trim(); }
+
+    return (
+      ( prefix                       + EOL      ) +
+      ( error                        + EOL      ) +
+      ( response !== null ? response + EOL : '' ) +
+      ( previous !== null ? previous + EOL : '' )
     );
-    if (this.toStringResponse() !== null)
-    {
-      text = text + EOL + this.toStringResponse();
-    }
-    if (this.toStringPrevious() !== null)
-    {
-      text = text + EOL + this.toStringPrevious();
-    }
-    text = text + EOL;
-    return text;
   }
 
   protected toStringPrefix(): string
