@@ -11,8 +11,9 @@
     "allowJs":                       false,
     "outDir":                        "dist",
     "paths": {
-      "@lib/*":                ["./src/lib/*"]
+      "@lib/*":                ["./src/lib/*"],
+      "@test/lib/*":           ["./test/lib/*"]
     }
   },
-  "include":            ["src/**/*"]
+  "include":            ["src/**/*", "test/**/*"]
 }
