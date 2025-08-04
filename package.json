@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/leismore/lmos-nodejs-lmerror#readme",
   "devDependencies": {
-    "@leismore/lmos-nodejs-primitives": "^1.0.0",
+    "@leismore/lmos-nodejs-primitives": "^1.1.0",
     "@types/node": "^22.16.5",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
