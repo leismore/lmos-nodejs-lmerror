@@ -56,6 +56,9 @@ class LMError extends Error
     // Initialize the parent Error class
     super(error.message, {cause: previous === undefined? undefined : previous});
 
+    // Set standard properties
+    this.name = 'LMError';
+
     // Initialize the properties
     this.error     = error;
     this.response  = response;
@@ -89,7 +92,7 @@ class LMError extends Error
 
   protected toStringPrefix(): string
   {
-    const ERROR_NAME:string = this.constructor.name;
+    const ERROR_NAME:string = this.name;
     return ( this.timestamp.toISOString() + ' / ' + ERROR_NAME );
   }
 
