@@ -14,8 +14,8 @@
 
 import {EOL} from 'os';
 import {ptnMessage, ptnCode, ptnStatusCode} from '@lib/patterns.js';
-import {Err} from '@lib/type/Err.js';
-import {Res, Header as ResHeader} from '@lib/type/Res.js';
+import type {Err} from '@lib/type/Err.js';
+import type {Res, Header as ResHeader} from '@lib/type/Res.js';
 
 class LMError extends Error
 {
@@ -320,4 +320,6 @@ class LMError extends Error
 
 
 
-export {LMError, Err, Res, ResHeader};
+export {LMError};
+
+export type { Err, Res, ResHeader };
