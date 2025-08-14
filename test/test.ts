@@ -1,3 +1,4 @@
+import { EOL }                  from 'os';
 import assert                   from 'node:assert/strict';
 import test                     from 'node:test';
 import { LMError }              from '@src/index.js';
@@ -8,10 +9,6 @@ import {
     ERROR_VALID as THE_VALID_ERROR
 } from '@test/lib/errors.js';
 
-
-/**
- * Creating LMError instances
- */
 
 // Test LMErrorErr-s
 test('LMErrorErr-s', async (t) => {
@@ -44,6 +41,10 @@ test('LMErrorErr-s', async (t) => {
             assert.strictEqual(error.name, 'LMError', error.name);
             assert.strictEqual(error.message, value.message, error.message);
             assert.deepStrictEqual(error.error, value, JSON.stringify(error.error));
+            assert.strictEqual(String(error), (
+                `${error.timestamp.toISOString()} / LMError`   + EOL +
+                `${error.error.message} (${error.error.code})` + EOL
+            ), String(error));
         });
     }
 
