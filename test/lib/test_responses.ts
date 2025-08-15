@@ -77,6 +77,16 @@ function test_responses():void
             }, Error);
         });
 
+        // RESPONSE_WITHOUT_CODE_HEADERS_BODY
+        await t.test(`LMErrorRes - ${JSON.stringify(RESPONSE_WITHOUT_CODE_HEADERS_BODY)}`,
+            () => {
+                assert.throws(() => {
+                    // @ts-expect-error
+                    new LMError(THE_VALID_ERROR, RESPONSE_WITHOUT_CODE_HEADERS_BODY);
+                }, Error);
+            }
+        );
+
     });
 }
 
