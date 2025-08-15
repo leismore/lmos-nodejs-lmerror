@@ -87,6 +87,26 @@ function test_responses():void
             }
         );
 
+        // RESPONSE_HEADERS_NOT_ARRAY
+        await t.test(`LMErrorRes - ${JSON.stringify(RESPONSE_HEADERS_NOT_ARRAY)}`,
+            () => {
+                assert.throws(() => {
+                    // @ts-expect-error
+                    new LMError(THE_VALID_ERROR, RESPONSE_HEADERS_NOT_ARRAY);
+                }, Error);
+            }
+        );
+
+        // RESPONSE_HEADERS_WITHOUT_NAME_VALUE
+        await t.test(`LMErrorRes - ${JSON.stringify(RESPONSE_HEADERS_WITHOUT_NAME_VALUE)}`,
+            () => {
+                assert.throws(() => {
+                    // @ts-expect-error
+                    new LMError(THE_VALID_ERROR, RESPONSE_HEADERS_WITHOUT_NAME_VALUE);
+                }, Error);
+            }
+        );
+
     });
 }
 
