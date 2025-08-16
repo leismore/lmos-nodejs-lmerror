@@ -2,11 +2,12 @@
  * test_preErrors function - Test LMError class with different types of previous Errors
  */
 
-import { EOL }                  from 'os';
-import assert                   from 'node:assert/strict';
-import test                     from 'node:test';
-import { LMError, LMErrorResHeader } from '@src/index.js';
-import { ALL as PRIMITIVE_ALL } from '@leismore/lmos-nodejs-primitives';
+import { EOL }                   from 'os';
+import assert                    from 'node:assert/strict';
+import test                      from 'node:test';
+import { LMError }               from '@src/index.js';
+import type { LMErrorResHeader } from '@src/index.js';
+import { ALL as PRIMITIVE_ALL }  from '@leismore/lmos-nodejs-primitives';
 
 import {
     ERROR_VALID as THE_VALID_ERROR
