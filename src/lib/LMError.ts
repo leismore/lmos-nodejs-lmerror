@@ -131,7 +131,7 @@ class LMError extends Error
       body = null;
     }
     else {
-      body = String(this.response.body);
+      body = JSON.stringify(this.response.body);
     }
 
     // Return the formatted response string
