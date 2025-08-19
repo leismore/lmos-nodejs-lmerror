@@ -5,18 +5,18 @@
 import { EOL }                   from 'os';
 import assert                    from 'node:assert/strict';
 import test                      from 'node:test';
-import { LMError }               from '@src/index.js';
-import type { LMErrorResHeader } from '@src/index.js';
+import { LMError }               from '../../src/index.js';
+import type { LMErrorResHeader } from '../../src/index.js';
 import { ALL as PRIMITIVE_ALL }  from '@leismore/lmos-nodejs-primitives';
 
 import {
     ERROR_VALID as THE_VALID_ERROR
-} from '@test/lib/errors.js';
+} from './errors.js';
 
 import {
     VALID   as RESPONSE_VALID,
     INVALID as RESPONSE_INVALID
-} from '@test/lib/responses.js';
+} from './responses.js';
 
 
 function test_responses():void

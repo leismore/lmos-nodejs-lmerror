@@ -5,12 +5,12 @@
 import { EOL }                  from 'os';
 import assert                   from 'node:assert/strict';
 import test                     from 'node:test';
-import { LMError }              from '@src/index.js';
+import { LMError }              from '../../src/index.js';
 import { ALL as PRIMITIVE_ALL } from '@leismore/lmos-nodejs-primitives';
 import {
     VALID    as ERROR_VALID,
     INVALID  as ERROR_INVALID
-} from '@test/lib/errors.js';
+} from './errors.js';
 
 function test_errors():void
 {

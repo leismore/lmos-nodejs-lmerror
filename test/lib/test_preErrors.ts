@@ -5,22 +5,22 @@
 import { EOL }                   from 'os';
 import assert                    from 'node:assert/strict';
 import test                      from 'node:test';
-import { LMError }               from '@src/index.js';
-import type { LMErrorResHeader } from '@src/index.js';
+import { LMError }               from '../../src/index.js';
+import type { LMErrorResHeader } from '../../src/index.js';
 import { ALL as PRIMITIVE_ALL }  from '@leismore/lmos-nodejs-primitives';
 
 import {
     ERROR_VALID as THE_VALID_ERROR
-} from '@test/lib/errors.js';
+} from './errors.js';
 
 import {
     RESPONSE_VALID as THE_VALID_RESPONSE
-} from '@test/lib/responses.js';
+} from './responses.js';
 
 import {
     INVALID as PRE_ERROR_INVALID,
     VALID   as PRE_ERROR_VALID
-} from '@test/lib/preErrors.js'
+} from './preErrors.js'
 
 
 function test_preErrors():void

@@ -2,7 +2,7 @@
  * Predefined different types of error objects as previous errors for testing the LMError class.
  */
 
-import { LMError } from '@src/index.js';
+import { LMError } from '../../src/index.js';
 
 // Non-Error objects
 const PREVIOUS_EMPTY = {};
