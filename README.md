@@ -119,9 +119,15 @@ public toString(): string
 
 ## License
 
-© [Leismore](https://www.leismore.co) 2025
+© [Leismore](https://www.leismore.co) 2026
 
 [MIT License](https://choosealicense.com/licenses/mit)
+
+## Donation
+
+* [Leismore](https://github.com/sponsors/leismore) on GitHub
+
+Help us to pay our bills, so we can focus on developing and maintaining this project.
 
 ## Authors
 
