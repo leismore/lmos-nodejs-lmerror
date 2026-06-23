@@ -12,7 +12,7 @@
  *   invalid_previous
  */
 
-import {EOL} from 'os';
+import {EOL} from 'node:os';
 import {ptnMessage, ptnCode, ptnStatusCode} from './patterns.js';
 import type {Err} from './type/Err.js';
 import type {Res, Header as ResHeader} from './type/Res.js';
@@ -50,11 +50,15 @@ class LMError extends Error
       }
     } catch (e)
     {
-      throw e;
+      throw e as Error;
     }
 
     // Initialize the parent Error class
-    super(error.message, {cause: previous === undefined? undefined : previous});
+    if (previous === undefined) {
+      super(error.message);
+    } else {
+      super(error.message, {cause: previous});
+    }
 
     // Set standard properties
     this.name = 'LMError';
@@ -131,7 +135,7 @@ class LMError extends Error
       body = null;
     }
     else {
-      body = JSON.stringify(this.response.body);
+      body = String(this.response.body);
     }
 
     // Return the formatted response string

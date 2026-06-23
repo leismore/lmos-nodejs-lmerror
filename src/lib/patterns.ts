@@ -5,7 +5,7 @@
  *   3. ptnStatusCode = HTTP response status code
  */
 
-const ptnMessage    = /^.+$/u;
+const ptnMessage    = /^[\w\u0020]+$/;
 const ptnCode       = /^\w+$/;
 const ptnStatusCode = /^\d{3}$/;
 
