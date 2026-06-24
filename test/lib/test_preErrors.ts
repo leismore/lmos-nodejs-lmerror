@@ -2,7 +2,7 @@
  * test_preErrors function - Test LMError class with different types of previous Errors
  */
 
-import { EOL }                   from 'os';
+import { EOL }                   from 'node:os';
 import assert                    from 'node:assert/strict';
 import test                      from 'node:test';
 import { LMError }               from '../../src/index.js';
@@ -38,33 +38,34 @@ function test_preErrors():void
                     const error = new LMError(THE_VALID_ERROR, THE_VALID_RESPONSE, value);
 
                     // Testing JavaScript standard properties
-                    assert.ok(error instanceof LMError, String(error));
-                    assert.strictEqual(error.name, 'LMError', error.name);
-                    assert.strictEqual(error.message, THE_VALID_ERROR.message, error.message);
-                    assert.strictEqual(error.cause, undefined, String(error.cause));
+                    assert.ok(error instanceof LMError, 'Not instance of LMError');
+                    assert.strictEqual(error.name, 'LMError', 'Error name not LMError');
+                    assert.strictEqual(error.message, THE_VALID_ERROR.message, 'Incorrect error message');
+                    assert.strictEqual(error.cause, undefined, 'Error cause not undefined');
 
                     // Testing LMError properties
                     assert.deepStrictEqual(
                         error.error,
                         THE_VALID_ERROR,
-                        JSON.stringify(error.error)
+                        'Incorrect error property'
                     );
                     assert.strictEqual(
-                        error.response?.statusCode,
+                        error.response!.statusCode,
                         THE_VALID_RESPONSE.statusCode,
-                        error.response?.statusCode
+                        'Incorrect response property - status code'
                     );
                     assert.deepStrictEqual(
-                        error.response.headers,
+                        error.response!.headers,
                         THE_VALID_RESPONSE.headers,
-                        JSON.stringify(error.response.headers)
+                        'Incorrect response property - headers'
                     );
                     assert.deepStrictEqual(
-                        error.response.body,
+                        error.response!.body,
                         THE_VALID_RESPONSE.body,
-                        JSON.stringify(error.response.body)
+                        'Incorrect response property - body'
                     );
-                    assert.strictEqual(error.previous, undefined, String(error.previous));
+                    assert.strictEqual(error.previous, undefined, 'Previous property not undefined');
+                    assert.ok(error.timestamp instanceof Date, 'Timestamp property not instance of Date');
 
                     // LMError method - toString
                     assert.strictEqual(
@@ -80,17 +81,17 @@ function test_preErrors():void
                                 return `${header.name}: ${header.value}`;
                             }).join(EOL)                                             + EOL ) +
 
-                            (  JSON.stringify(THE_VALID_RESPONSE.body) + EOL      )
+                            (  String(THE_VALID_RESPONSE.body) + EOL      )
                         ),
 
-                        String(error)
+                        'Incorrect error string representation'
                     );
 
                 } else {
                     assert.throws(() => {
                         // @ts-expect-error
                         new LMError(THE_VALID_ERROR, THE_VALID_RESPONSE, value);
-                    }, Error);
+                    }, Error, 'Error not thrown');
                 }
 
             });
@@ -103,7 +104,7 @@ function test_preErrors():void
                 assert.throws(() => {
                     // @ts-expect-error
                     new LMError(THE_VALID_ERROR, THE_VALID_RESPONSE, value);
-                }, Error);
+                }, Error, 'Error not thrown');
             });
         }
 
@@ -116,33 +117,34 @@ function test_preErrors():void
                 const error = new LMError(THE_VALID_ERROR, THE_VALID_RESPONSE, value);
 
                 // Testing JavaScript standard properties
-                assert.ok(error instanceof LMError, String(error));
-                assert.strictEqual(error.name, 'LMError', error.name);
-                assert.strictEqual(error.message, THE_VALID_ERROR.message, error.message);
-                assert.strictEqual(error.cause, value, String(error.cause));
+                assert.ok(error instanceof LMError, 'Not instance of LMError');
+                assert.strictEqual(error.name, 'LMError', 'Error name not LMError');
+                assert.strictEqual(error.message, THE_VALID_ERROR.message, 'Incorrect error message');
+                assert.strictEqual(error.cause, value, 'Incorrect error cause');
 
                 // Testing LMError properties
                 assert.deepStrictEqual(
                     error.error,
                     THE_VALID_ERROR,
-                    JSON.stringify(error.error)
+                    'Incorrect error property'
                 );
                 assert.strictEqual(
-                    error.response?.statusCode,
+                    error.response!.statusCode,
                     THE_VALID_RESPONSE.statusCode,
-                    error.response?.statusCode
+                    'Incorrect response property - status code'
                 );
                 assert.deepStrictEqual(
-                    error.response.headers,
+                    error.response!.headers,
                     THE_VALID_RESPONSE.headers,
-                    JSON.stringify(error.response.headers)
+                    'Incorrect response property - headers'
                 );
                 assert.deepStrictEqual(
-                    error.response.body,
+                    error.response!.body,
                     THE_VALID_RESPONSE.body,
-                    JSON.stringify(error.response.body)
+                    'Incorrect response property - body'
                 );
-                assert.strictEqual(error.previous, value, String(error.previous));
+                assert.strictEqual(error.previous, value, 'Incorrect previous property');
+                assert.ok(error.timestamp instanceof Date, 'Timestamp property not instance of Date');
 
                 // LMError method - toString
                 assert.strictEqual(
@@ -157,11 +159,11 @@ function test_preErrors():void
                             return `${header.name}: ${header.value}`;
                         }).join(EOL)                                             + EOL ) +
                         
-                        (  JSON.stringify(THE_VALID_RESPONSE.body)               + EOL ) +
+                        (  String(THE_VALID_RESPONSE.body)                       + EOL ) +
 
                         ( String(value).trimEnd() + EOL )
                     ),
-                    String(error),
+                     'Incorrect error string representation'
                 );
             });
         }

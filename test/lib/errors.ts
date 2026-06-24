@@ -7,23 +7,23 @@ const ERROR_EMPTY = {};
 
 const ERROR_WITHOUT_MESSAGE_CODE = {
     notMessage : 'This is not a message',
-    notCode    : 'This is not a code'
+    notCode    : 'this_is_not_a_code'
 };
 
 const ERROR_WITHOUT_MESSAGE = {
     notMessage : 'This is not a message',
-    code       : 'This is a code'
+    code       : 'this_is_a_code'
 };
 
 const ERROR_WITHOUT_CODE = {
     message : 'This is a message',
-    notCode : 'This is not a code'
+    notCode : 'this_is_not_a_code'
 };
 
 // Invalid data types
 const ERROR_MESSAGE_NOT_STRING = {
     message : 12345,
-    code    : 'This is a code'
+    code    : 'this_is_a_code'
 };
 
 const ERROR_CODE_NOT_STRING = {
@@ -38,7 +38,7 @@ const ERROR_MESSAGE_CODE_NOT_STRING = {
 
 const ERROR_MESSAGE_EMPTY = {
     message : '',
-    code    : 'This is a code'
+    code    : 'this_is_a_code'
 };
 
 const ERROR_CODE_EMPTY = {
@@ -53,7 +53,7 @@ const ERROR_MESSAGE_CODE_EMPTY = {
 
 const ERROR_CODE_SPECIAL_CHARACTERS = {
     message : 'This is a message',
-    code    : 'This is a code with special characters !@#$%^&*()'
+    code    : 'This_is_a_code_with_special_characters_!@#$%^&*()'
 };
 
 // Valid

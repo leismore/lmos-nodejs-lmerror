@@ -64,7 +64,7 @@ const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS_BODY = new LMError(
 
 const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS_HEADERS_BODY = new LMError(
     {
-        message : 'This is a LMError object with response status code, headers and body',
+        message : 'This is a LMError object with response status code and headers and body',
         code    : 'lmerror_05'
     },
     {
