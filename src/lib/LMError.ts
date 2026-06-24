@@ -10,10 +10,11 @@
  *   invalid_http_header
  *   invalid_http_body
  *   invalid_previous
+ *   invalid_http_header_name
  */
 
 import {EOL} from 'node:os';
-import {ptnMessage, ptnCode, ptnStatusCode} from './patterns.js';
+import {ptnMessage, ptnCode, ptnStatusCode, ptnHTTPHeaderName} from './patterns.js';
 import type {Err} from './type/Err.js';
 import type {Res, Header as ResHeader} from './type/Res.js';
 
@@ -92,6 +93,46 @@ class LMError extends Error
       ( response !== null ? response + EOL : '' ) +
       ( previous !== null ? previous + EOL : '' )
     );
+  }
+
+  /**
+   * Get the value of a response header by name.
+   * 
+   * @throws {Error}
+   *   invalid_http_header_name
+   */
+  public getResHeader(name: string): (string | null)
+  {
+    // Validate name
+    if ( typeof name !== 'string' ||
+         !ptnHTTPHeaderName.test(name) )
+    {
+      throw new Error('invalid_http_header_name');
+    }
+
+    // Header undefined
+    if ( this.response                === undefined ||
+         this.response.headers        === undefined ||
+         this.response.headers.length === 0 )
+    {
+      return null;
+    }
+
+    // Find the header by name (case-insensitive)
+    const header: (ResHeader | undefined) = this.response.headers.find(
+      (header: ResHeader) => {
+          return header.name.toLowerCase() === name.toLowerCase();
+      }
+    );
+
+    if (header === undefined)
+    {
+      return null;
+    }
+    else
+    {
+      return header.value;
+    }
   }
 
   protected toStringPrefix(): string

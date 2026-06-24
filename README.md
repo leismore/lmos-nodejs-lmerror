@@ -115,6 +115,14 @@ public readonly timestamp  :   Date;
 public constructor(error: LMErrorErr, response?: LMErrorRes, previous?: Error)
 
 public toString(): string
+
+/**
+ * Get the value of a response header by name.
+ * 
+ * @throws {Error}
+ *   invalid_http_header_name
+ */
+public getResHeader(name: string): (string | null)
 ```
 
 ## License
