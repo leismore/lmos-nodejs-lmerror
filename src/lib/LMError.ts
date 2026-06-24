@@ -175,6 +175,10 @@ class LMError extends Error
     {
       body = null;
     }
+    else if (this.getResHeader('content-type')?.toLowerCase() === 'application/json')
+    {
+      body = JSON.stringify(this.response.body, undefined, 2);
+    }
     else {
       body = String(this.response.body);
     }
