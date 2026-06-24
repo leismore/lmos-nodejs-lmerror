@@ -341,6 +341,17 @@ class LMError extends Error
       throw new Error('invalid_http_statusCode');
     }
 
+    if (headers !== undefined && headers.length > 0)
+    {
+      for (const header of headers)
+      {
+        if ( !ptnHTTPHeaderName.test(header.name) )
+        {
+          throw new Error('invalid_http_header');
+        }
+      }
+    }
+
     // Return the valid response object
     validResponse = {
       statusCode : statusCode,
