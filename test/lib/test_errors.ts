@@ -39,19 +39,33 @@ function test_errors():void
         // Valid objects
         for (const value of ERROR_VALID) {
             await t.test(`LMErrorErr - ${JSON.stringify(value)}`, () => {
+
+                // LMError instance
                 const error = new LMError(value);
+
+                // Testing JavaScript standard properties
                 assert.ok(error instanceof LMError, 'Not instance of LMError');
                 assert.strictEqual(error.name, 'LMError', 'Error name not LMError');
                 assert.strictEqual(error.message, value.message, 'Incorrect error message');
                 assert.strictEqual(error.cause, undefined, 'Error cause not undefined');
+
+                // Testing LMError properties
                 assert.deepStrictEqual(error.error, value, 'Incorrect error property');
                 assert.strictEqual(error.response, undefined, 'Response property not undefined');
                 assert.strictEqual(error.previous, undefined, 'Previous property not undefined');
                 assert.ok(error.timestamp instanceof Date, 'Timestamp property not instance of Date');
+
+                // LMError method - toString
                 assert.strictEqual(String(error), (
                     `${error.timestamp.toISOString()} / LMError`   + EOL +
                     `${value.message} (${value.code})` + EOL
                 ), 'Incorrect error string representation');
+
+                // LMError method - getResHeader
+                assert.strictEqual(
+                  error.getResHeader('Content-Type'), null,
+                  'HTTP header (Content-Type) not null'
+                );
             });
         }
     

@@ -28,19 +28,33 @@ function test_responses():void
             await t.test(`LMErrorRes - ${String(value)}`, () => {
                 if (value === undefined)
                 {
+                    // LMError instance
                     const error = new LMError(THE_VALID_ERROR, value);
+
+                    // Testing JavaScript standard properties
                     assert.ok(error instanceof LMError, 'Not instance of LMError');
                     assert.strictEqual(error.name, 'LMError', 'Error name not LMError');
                     assert.strictEqual(error.message, THE_VALID_ERROR.message, 'Incorrect error message');
                     assert.strictEqual(error.cause, undefined, 'Error cause not undefined');
+
+                    // Testing LMError properties
                     assert.deepStrictEqual(error.error, THE_VALID_ERROR, 'Incorrect error property');
                     assert.strictEqual(error.response, undefined, 'Response property not undefined');
                     assert.strictEqual(error.previous, undefined, 'Previous property not undefined');
                     assert.ok(error.timestamp instanceof Date, 'Timestamp property not instance of Date');
+
+                    // LMError method - toString
                     assert.strictEqual(String(error), (
                         `${error.timestamp.toISOString()} / LMError`   + EOL +
                         `${THE_VALID_ERROR.message} (${THE_VALID_ERROR.code})` + EOL
                     ), 'Incorrect error string representation');
+
+                    // LMError method - getResHeader
+                    assert.strictEqual(
+                        error.getResHeader('Content-Type'), null,
+                        'HTTP header (Content-Type) not null'
+                    );
+
                 } else {
                     assert.throws(() => {
                         // @ts-expect-error
@@ -162,10 +176,28 @@ function test_responses():void
                             return `${header.name}: ${header.value}`
                           }).join(EOL) + EOL )                                       ) +
 
-                      ( body === undefined ? '' : ( String(body) + EOL )     )
+                      ( body === undefined ? '' : (
+                            
+                        error.getResHeader('content-type')?.toLowerCase() === 'application/json' ?
+                        ( JSON.stringify(body, undefined, 2) + EOL ) :
+                        ( String(body) + EOL )
+
+                      )     )
                     ),
 
                     'Incorrect error string representation'
+                );
+
+                // LMError method - getResHeader
+                assert.ok(
+
+                    (
+                          error.getResHeader('Content-Type')         === null     ||
+                        ( typeof error.getResHeader('Content-Type')  === 'string' &&
+                          error.getResHeader('Content-Type')!.length !== 0 )
+                    ),
+
+                    'HTTP header (Content-Type) not string or null'
                 );
 
             });

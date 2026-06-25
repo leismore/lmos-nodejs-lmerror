@@ -81,10 +81,16 @@ function test_preErrors():void
                                 return `${header.name}: ${header.value}`;
                             }).join(EOL)                                             + EOL ) +
 
-                            (  String(THE_VALID_RESPONSE.body) + EOL      )
+                            (  JSON.stringify(THE_VALID_RESPONSE.body, undefined, 2) + EOL      )
                         ),
 
                         'Incorrect error string representation'
+                    );
+
+                    // LMError method - getResHeader
+                    assert.strictEqual(
+                        error.getResHeader('Content-Type'), 'application/json',
+                        'HTTP header (Content-Type) not application/json'
                     );
 
                 } else {
@@ -159,11 +165,17 @@ function test_preErrors():void
                             return `${header.name}: ${header.value}`;
                         }).join(EOL)                                             + EOL ) +
                         
-                        (  String(THE_VALID_RESPONSE.body)                       + EOL ) +
+                        (  JSON.stringify(THE_VALID_RESPONSE.body, undefined, 2) + EOL ) +
 
                         ( String(value).trimEnd() + EOL )
                     ),
                      'Incorrect error string representation'
+                );
+
+                // LMError method - getResHeader
+                assert.strictEqual(
+                    error.getResHeader('Content-Type'), 'application/json',
+                    'HTTP header (Content-Type) not application/json'
                 );
             });
         }
