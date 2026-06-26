@@ -189,16 +189,22 @@ function test_responses():void
                 );
 
                 // LMError method - getResHeader
-                assert.ok(
-
-                    (
-                          error.getResHeader('Content-Type')         === null     ||
-                        ( typeof error.getResHeader('Content-Type')  === 'string' &&
-                          error.getResHeader('Content-Type')!.length !== 0 )
-                    ),
-
-                    'HTTP header (Content-Type) not string or null'
-                );
+                if ( headers === undefined || headers.length === 0 )
+                {
+                    assert.strictEqual(
+                        error.getResHeader('Content-Type'), null,
+                        'HTTP header (Content-Type) not null'
+                    );
+                } else {
+                    for (const header of headers)
+                    {
+                        assert.strictEqual(
+                            error.getResHeader(header.name),
+                            header.value,
+                            `HTTP header (${header.name}) not correct`
+                        );
+                    }
+                }
 
             });
         }
