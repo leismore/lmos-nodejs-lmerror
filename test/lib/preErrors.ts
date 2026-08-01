@@ -13,23 +13,23 @@ const PREVIOUS_NOT_ERROR = {
 };
 
 // Error objects
-const PREVIOUS_ERROR_WITHOUT_CAUSE = new Error('This is an Error object without cause');
+const PREVIOUS_ERROR_WITHOUT_CAUSE = new Error('This is an Error object without cause.');
 
-const PREVIOUS_ERROR_WITH_CAUSE = new Error('This is an Error object with cause', {
-    cause: new Error('This is the cause of the error')
+const PREVIOUS_ERROR_WITH_CAUSE = new Error('This is an Error object with cause!', {
+    cause: new Error('This is the cause of the error.')
 });
 
 // LMError objects
 const PREVIOUS_LMERROR_ERROR = new LMError(
     {
-        message : 'This is a LMError object',
+        message : 'This is a LMError object.',
         code    : 'lmerror_01'
     }
 );
 
 const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS = new LMError(
     {
-        message : 'This is a LMError object with response',
+        message : 'This is a LMError object with response!',
         code    : 'lmerror_02'
     },
     {
@@ -39,7 +39,7 @@ const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS = new LMError(
 
 const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS_HEADERS = new LMError(
     {
-        message : 'This is a LMError object with response status code and headers',
+        message : 'This is a LMError object with response status code and headers.',
         code    : 'lmerror_03'
     },
     {
@@ -53,7 +53,7 @@ const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS_HEADERS = new LMError(
 
 const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS_BODY = new LMError(
     {
-        message : 'This is a LMError object with response status code and body',
+        message : 'This is a LMError object with response status code and body.',
         code    : 'lmerror_04'
     },
     {
@@ -64,7 +64,7 @@ const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS_BODY = new LMError(
 
 const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS_HEADERS_BODY = new LMError(
     {
-        message : 'This is a LMError object with response status code and headers and body',
+        message : 'This is a LMError object with response status code and headers and body.',
         code    : 'lmerror_05'
     },
     {
@@ -82,7 +82,7 @@ const PREVIOUS_LMERROR_ERROR_RESPONSE_STATUS_HEADERS_BODY = new LMError(
 
 const PREVIOUS_LMERROR_PRE_ERROR = new LMError(
     {
-        message : 'This is a LMError object with previous error',
+        message : 'This is a LMError object with previous error.',
         code    : 'lmerror_06'
     },
     {
@@ -96,14 +96,14 @@ const PREVIOUS_LMERROR_PRE_ERROR = new LMError(
             error: 'not found'
         }
     },
-    new Error('This is the previous error', {
-        cause: new Error('This is the cause of the previous error')
+    new Error('This is the previous error.', {
+        cause: new Error('This is the cause of the previous error!')
     })
 );
 
 const PREVIOUS_LMERROR_PRE_LMERROR = new LMError(
     {
-        message : 'This is a LMError object with previous LMError',
+        message : 'This is a LMError object with previous LMError.',
         code    : 'lmerror_07'
     },
     {
@@ -119,7 +119,7 @@ const PREVIOUS_LMERROR_PRE_LMERROR = new LMError(
     },
     new LMError(
         {
-            message : 'This is the previous LMError',
+            message : 'This is the previous LMError.',
             code    : 'lmerror_08'
         },
         {

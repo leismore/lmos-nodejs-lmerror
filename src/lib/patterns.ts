@@ -6,7 +6,7 @@
  *   4. ptnHTTPHeaderName = HTTP header name
  */
 
-const ptnMessage        = /^[\w\u0020]+$/;
+const ptnMessage        = /^[\x20-\x7E]+$/;
 const ptnCode           = /^\w+$/;
 const ptnStatusCode     = /^\d{3}$/;
 const ptnHTTPHeaderName = /^[\w\-]+$/;

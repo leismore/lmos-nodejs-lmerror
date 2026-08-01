@@ -6,17 +6,17 @@
 const ERROR_EMPTY = {};
 
 const ERROR_WITHOUT_MESSAGE_CODE = {
-    notMessage : 'This is not a message',
+    notMessage : 'This is not a message!',
     notCode    : 'this_is_not_a_code'
 };
 
 const ERROR_WITHOUT_MESSAGE = {
-    notMessage : 'This is not a message',
+    notMessage : 'This is not a message?',
     code       : 'this_is_a_code'
 };
 
 const ERROR_WITHOUT_CODE = {
-    message : 'This is a message',
+    message : 'This is a message?!',
     notCode : 'this_is_not_a_code'
 };
 
@@ -27,7 +27,7 @@ const ERROR_MESSAGE_NOT_STRING = {
 };
 
 const ERROR_CODE_NOT_STRING = {
-    message : 'This is a message',
+    message : 'This is a message.',
     code    : 12345
 };
 
@@ -42,7 +42,7 @@ const ERROR_MESSAGE_EMPTY = {
 };
 
 const ERROR_CODE_EMPTY = {
-    message : 'This is a message',
+    message : 'This is a message ...',
     code    : ''
 };
 
@@ -52,13 +52,13 @@ const ERROR_MESSAGE_CODE_EMPTY = {
 };
 
 const ERROR_CODE_SPECIAL_CHARACTERS = {
-    message : 'This is a message',
+    message : 'This is a message: Something went wrong!',
     code    : 'This_is_a_code_with_special_characters_!@#$%^&*()'
 };
 
 // Valid
 const ERROR_VALID = {
-    message : 'This is a message',
+    message : 'This is a message.',
     code    : 'code_32'
 };
 

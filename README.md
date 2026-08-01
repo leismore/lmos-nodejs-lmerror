@@ -1,6 +1,6 @@
 # lmos-nodejs-lmerror
 
-An Error class for [LMOS for Node.js](https://nodejs.lmos.leismore.org) project
+An Error class for [LMOS for Node.js](https://nodejs.lmos.leismore.org) project.
 
 ## Features
 
@@ -73,7 +73,7 @@ throw new LMError(error, response, previous);
 
 ```typescript
 type LMErrorErr = {
-  readonly message: string, // Message for human. Only letter, number, space, and underscore allowed.
+  readonly message: string, // Message for human. Only ASCII printable characters allowed.
   readonly code:    string  // Code for machine. Only letter, number, and underscore allowed.
 };
 
@@ -127,13 +127,13 @@ public getResHeader(name: string): (string | null)
 
 ## License
 
-© [Leismore](https://www.leismore.co) 2026
+© [Leismore™](https://www.leismore.co) 2026
 
-[MIT License](https://choosealicense.com/licenses/mit)
+[MIT License](https://github.com/leismore/lmos-nodejs-lmerror/blob/main/LICENSE)
 
 ## Donation
 
-* [Leismore](https://github.com/sponsors/leismore) on GitHub
+* [Leismore™](https://github.com/sponsors/leismore) on GitHub
 
 Help us to pay our bills, so we can focus on developing and maintaining this project.
 
@@ -151,6 +151,6 @@ Help us to pay our bills, so we can focus on developing and maintaining this pro
 
 ------------------------------------------------------------------------------
 
-Product of [Leismore OpenSource](https://lmos.leismore.org) Project
+Product of [Leismore™ OpenSource](https://lmos.leismore.org) Project
 
-Supported by [Leismore](https://www.leismore.co) (Australian Business Number: 25 935 862 619)
+Supported by [Leismore™](https://www.leismore.co) (Australian Business Number: 25 935 862 619)

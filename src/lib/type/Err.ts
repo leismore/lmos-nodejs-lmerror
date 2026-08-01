@@ -3,7 +3,7 @@
  */
 
 type Err = {
-  readonly message: string, // Message for human. Only letter, number, space, and underscore allowed.
+  readonly message: string, // Message for human. Only ASCII printable characters allowed.
   readonly code:    string  // Code for machine. Only letter, number, and underscore allowed.
 };
 
