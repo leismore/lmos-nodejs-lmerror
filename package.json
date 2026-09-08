@@ -1,6 +1,6 @@
 {
   "name": "@leismore/lmos-nodejs-lmerror",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "An Error class for LMOS for Node.js project",
   "main": "dist/src/index.js",
   "type": "module",
@@ -28,9 +28,9 @@
     "Node"
   ],
   "author": {
-    "name": "Kyle Chine",
-    "url": "https://kyle.chine.leismore.org",
-    "email": "kyle.chine@leismore.co"
+    "name": "Kyle Chinn",
+    "url": "https://kyle.chinn.leismore.org",
+    "email": "kyle.chinn@leismore.co"
   },
   "funding": {
     "type": "github",
